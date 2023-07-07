@@ -21,38 +21,28 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.status(201).json({
-    message: 'created',
-    data: body,
-  });
+  const newProduct = productService.create(body);
+  res.status(201).json(newProduct);
 });
 
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.status(201).json({
-    message: 'updated',
-    data: body,
-    id,
-  });
+  const product = productService.partialUpdate(id, body);
+  res.status(200).json(product);
 });
 
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  });
+  const product = productService.update(id, body);
+  res.status(200).json(product);
 });
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    message: 'deleted',
-    id,
-  });
+  const rta = productService.delete(id);
+  res.json(rta);
 });
 
 module.exports = router;
