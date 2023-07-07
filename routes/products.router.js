@@ -36,7 +36,7 @@ router.patch('/:id', async (req, res) => {
     const product = await productService.partialUpdate(id, body);
     res.status(200).json(product);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    next(error);
   }
 });
 
